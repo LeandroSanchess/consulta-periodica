@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b1726">
+  <title>Consulta periódica · Perovskitas duplas</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><span class="brand-mark" aria-hidden="true">A₂BB′X₆</span><div><strong>Consulta periódica</strong><span>Dataset de perovskitas duplas</span></div></div>
+    <div class="top-stats" aria-live="polite"><span><strong id="total-count">—</strong> estruturas canônicas</span><span><strong id="final-count">—</strong> no Tier A final</span></div>
+  </header>
+
+  <main>
+    <section class="intro" aria-labelledby="page-title">
+      <div><p class="eyebrow">Explorar candidatos</p><h1 id="page-title">Encontre estruturas pelos elementos</h1><p>Selecione elementos na tabela periódica. A busca mostra as estruturas que os contêm e sua presença nas listas de tier.</p></div>
+      <div id="quick-result" class="quick-result" aria-live="polite"></div>
+    </section>
+
+    <section class="workspace" aria-label="Filtros de estruturas">
+      <div class="periodic-panel">
+        <div class="panel-heading"><div><h2>Tabela periódica</h2><p>Clique em um ou mais elementos para filtrar.</p></div><span id="selected-count" class="subtle-pill">0 selecionados</span></div>
+        <div class="periodic-scroll"><div class="periodic-grid" id="periodic-grid" aria-label="Elementos da tabela periódica"></div></div>
+        <div class="periodic-footer"><div id="selected-elements" class="selected-elements" aria-live="polite"><span class="empty-selection">Nenhum elemento selecionado</span></div><button type="button" id="clear-elements" class="text-button">Limpar elementos</button></div>
+      </div>
+
+      <aside class="filter-panel" aria-label="Filtros adicionais">
+        <div class="panel-heading"><div><h2>Refinar busca</h2><p>Combine elementos e posições na fórmula.</p></div></div>
+        <label class="field"><span>Fórmula</span><input id="formula" type="search" placeholder="Ex.: Ba2NaTcO6" autocomplete="off"></label>
+        <label class="field"><span>Lista de tier</span><select id="tier"><option value="all">Todas as estruturas</option><option value="tier_A_final">Tier A final · composição nova</option><option value="A">Tier A preliminar</option><option value="B">Tier B</option><option value="exploratory">Exploratório</option><option value="unlisted">Fora das listas de descoberta</option></select></label>
+        <fieldset class="match-mode"><legend>Elementos selecionados</legend><label><input type="radio" name="mode" value="all" checked> Todos na estrutura</label><label><input type="radio" name="mode" value="any"> Qualquer um</label></fieldset>
+        <div class="site-fields"><span class="section-label">Posição na estrutura</span><div class="site-grid"><label class="field"><span>A</span><select data-site="A"><option value="">Qualquer</option></select></label><label class="field"><span>B</span><select data-site="B"><option value="">Qualquer</option></select></label><label class="field"><span>B′</span><select data-site="Bp"><option value="">Qualquer</option></select></label><label class="field"><span>X</span><select data-site="X"><option value="">Qualquer</option></select></label></div></div>
+        <button type="button" id="reset-filters" class="reset-button">Restaurar filtros</button>
+      </aside>
+    </section>
+
+    <section class="results-panel" aria-labelledby="results-title">
+      <div class="results-heading"><div><p class="eyebrow">Resultados</p><h2 id="results-title"><span id="result-count">—</span> estruturas encontradas</h2><p id="result-context">Carregando o dataset...</p></div><div class="tier-legend"><span><i class="tier-dot tier-a"></i> A</span><span><i class="tier-dot tier-b"></i> B</span><span><i class="tier-dot tier-exploratory"></i> Exploratório</span><span><i class="tier-dot tier-outside"></i> Não listado</span></div></div>
+      <div id="status" class="status" role="status" aria-live="polite"></div>
+      <div class="table-scroll"><table><thead><tr><th>Estrutura</th><th>Tier</th><th>Prioridade</th><th>Similaridade experimental</th><th>E<sub>hull</sub> restrita</th><th></th></tr></thead><tbody id="results-body"></tbody></table></div>
+      <div class="pagination"><span id="page-label"></span><div><button id="prev-page" type="button">Anterior</button><button id="next-page" type="button">Próxima</button></div></div>
+      <p class="data-note">Tier e propriedades são resultados computacionais. A similaridade experimental não é uma probabilidade calibrada de sucesso em laboratório.</p>
+    </section>
+  </main>
+
+  <dialog id="structure-dialog" aria-labelledby="dialog-title"><div class="dialog-shell"><div class="dialog-head"><div><p class="eyebrow">Ficha da estrutura</p><h2 id="dialog-title">—</h2><p id="dialog-subtitle"></p></div><button type="button" id="close-dialog" class="close-button" aria-label="Fechar detalhes">×</button></div><div id="dialog-summary" class="dialog-summary"></div><div id="dialog-content" class="dialog-content"></div><div class="dialog-footer"><span id="dialog-source"></span><button type="button" id="copy-json">Copiar JSON completo</button></div></div></dialog>
+  <script src="./app.js" defer></script>
+</body>
+</html>
